@@ -1,0 +1,5 @@
+#
+#ignore keyfile
+serverkey.pem
+netapp.txt
+.DS_Store
