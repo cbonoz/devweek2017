@@ -7,6 +7,7 @@ MongoDB storage for mirroring illustration when instance goes down.
 from flask import Flask, jsonify
 import logging
 import pymongo
+import requests
 
 from netapp import *
 
