@@ -18,8 +18,11 @@ from requests.auth import HTTPBasicAuth
 # Assuming the user knows what instance names and volumes are going to either be used within the load balancer for their application cluster, we can automatically extract the necessary configs to do instant snap mirroring to new instances in response to an event.
 
 # TODO: Support loading these settings from a csv file.
+
+# If any of the ONTAP_INSTANCES fail, backup to the indicated BACKUP_INSTANCE if available.
 ONTAP_INSTANCES = ['TeamOlive', 'TeamOlive2']
 ACTIVE_MOUNT_VOLUMES = ['Team_Olive', 'Team_Olive2']
+BACKUP_INSTANCE = ['TeamOlive2']
 IP_ADDRESSES = ["35.160.29.86"]
 
 # auth for OnTap API routes (use env for official release)
@@ -29,11 +32,8 @@ ONTAP_PASS = os.environ.get("ONTAP_PASS", 'Password@123')
 
 SERVICE_LEVEL = "Value"
 
-
-
-
 # =============================================
-# === AUTOMATIC NetApp Config LOADING BELOW === 
+# === AUTOMATIC NetApp Config LOADING BELOW ===
 # =============================================
 
 # Use of the active NetAppAPI Service
@@ -69,7 +69,6 @@ class NetAppInstance:
         # print(response.text)
         res = json.loads(response.text)
         records = res['result']['records']
-        print('get ssl')
         for r in records:
             # print(r['name'])
             if SERVICE_LEVEL in r['name']:
@@ -83,7 +82,6 @@ class NetAppInstance:
         res = json.loads(response.text)
         records = res['result']['records']
         name = self.name
-        print('get svm')
         for r in records:
             # print(r['name'])
             if name in r['name']:
@@ -97,7 +95,6 @@ class NetAppInstance:
         res = json.loads(response.text)
         records = res['result']['records']
         name = self.active_volume
-        print('get fs')
         for r in records:
             # print(r['name'])
             if name in r['name']:
@@ -111,10 +108,15 @@ class NetAppInstance:
             txt = "%s:\nSSL_KEY:%s\nSVM_KEY:%s\nFS_KEY:%s" % (self.name, self.sslKey,
                                                               self.svmKey, self.fsKey)
             f.write(txt)
+        print("Generated: " + file_name)
 
-# === LOAD 
+# === LOAD to credentials to file if main program.
+if __name__ == "__main__":
+    print(ONTAP_INSTANCES)
+    for i in range(len(ONTAP_INSTANCES)):
+        n0 = NetAppInstance(ONTAP_INSTANCES[i], ACTIVE_MOUNT_VOLUMES[i])
+        txt = "%s:\nSSL_KEY:%s\nSVM_KEY:%s\nFS_KEY:%s" % (n0.name, n0.sslKey,
+                                                              n0.svmKey, n0.fsKey)
+        n0.to_file()
 
-n0 = NetAppInstance(ONTAP_INSTANCES[0], ACTIVE_MOUNT_VOLUMES[0])
-for attr in dir(n0):
-    print("obj.%s = %s" % (attr, getattr(n0, attr)))
-n0.to_file()
+    print('done')

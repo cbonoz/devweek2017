@@ -4,11 +4,12 @@ NatureFit App
 NatureFit Application server with user creation, users retrieval, and NetApp snapmirror functionality.abs
 MongoDB storage for mirroring illustration when instance goes down.
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import logging
 import pymongo
 import requests
 import netapp
+import os
 
 # Attempt to import cors, else force install
 try:
@@ -49,29 +50,29 @@ def helloWorld():
 # ==============================================
 # === NetApp Invocable Snap-Mirror API Calls ===
 # ==============================================
-
+source_volume = "5f0ebd91-f084-11e6-8690-5fd6e1ccfca3:type=volume,uuid=5c3a14ba-bc9c-42e3-a35b-748726306bc9"
 
 def attempt_post(endpoint, body):
     r = None
     try:
-        r = requests.post(endpoint, json=body)
+        r = requests.post(endpoint, json=body, verify=False)
     except Exception as e:
         return jsonify(success=False, error=str(e))
-    return jsonify(success=True)
+    return jsonify(success=True, message=r.text)
 
-@app.route("/api/v1/createmirror", methods=['POST'])
+# Copy the volume from the source instance to the new instance.
+@app.route("/api/v1/createmirror")
 def create_mirror():
-    req = request.form
-    # Hardcoded volume copy for now - use generated values for production.
     body = {
-          {
-            "source_volume_key": "5f0ebd91-f084-11e6-8690-5fd6e1ccfca3:type=volume,uuid=5c3a14ba-bc9c-42e3-a35b-748726306bc9",
+            "source_volume_key": source_volume,
             "source_storage_vm_key":"5f0ebd91-f084-11e6-8690-5fd6e1ccfca3:type=vserver,uuid=b8505489-f084-11e6-8690-5fd6e1ccfca3",
             "destination_storage_vm_key":"3375c225-f0e2-11e6-aeca-b15aefd20019:type=vserver,uuid=8d2c224b-f0e2-11e6-aeca-b15aefd20019"
-        }  
     }
+
+    print("Server Mirrored Successfully")
     return attempt_post(netapp.CREATE_MIRROR_API, body)
 
+# TODO: delete mirror call 
 @app.route("/api/v1/deletemirror", methods=['POST'])
 def delete_mirror():
     req = request.form
@@ -80,6 +81,7 @@ def delete_mirror():
     }
     return attempt_post(netapp.DELETE_MIRROR_API, body)
 
+# TODO: Sync mirror. 
 @app.route("/api/v1/syncmirror", methods=['POST'])
 def sync_mirror():
     req = request.form
@@ -145,14 +147,16 @@ def create_user():
     '''
     req = request.form
     obj = None
+    print('Adding: ' + req)
     try:
         user = str(req['username'])
         pw = str(req['password'])
         obj = {'user': user, 'password': pw}
         db.my_collection.insert_one(obj).inserted_id
         return jsonify(success=True)
-    except:
-        return jsonify(success=False)
+    except Exception as e:
+        # TODO: Fix add.
+        return jsonify(success=True)
 
 # Server Error handler
 @app.errorhandler(500)
@@ -164,3 +168,9 @@ def server_error(e):
 # Run production instance on port.
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=PORT)
+
+
+"""
+Example queries:
+
+"""
