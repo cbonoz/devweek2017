@@ -1,0 +1,86 @@
+<style>
+  input, button {
+    float: right;
+  }
+  .sign-up-form .row {
+    margin-bottom: 5px;
+  }
+  .sign-up-form .button {
+    margin-top: 5px;
+  }
+  select {
+    width: 199px;
+    float: right;
+  }
+</style>
+<div ng-controller="LoginController">
+  <div class="row">
+    <div class="columns small-12 medium-6">
+      <div class="row">
+        <div class="columns small-10">
+          <form class="sign-up-form">
+            <h2>Sign Up</h2>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="fullname">Full Name</label>
+                <input type="text" name="full_name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="full-name">Email</label>
+                <input type="text" name="full_name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <button class="button sign-up">Sign Up!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="columns small-12 medium-6">
+      <div class="row">
+        <div class="columns small-10">
+          <form class="sign-up-form">
+            <h2>Login</h2>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="full-name">Email</label>
+                <input ng-model="user.email" type="text" name="full_name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="password">Password</label>
+                <input ng-model="user.password" type="password" name="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="member_type">Login as</label>
+                <select ng-model="user.membership" name="member_type" id="member_type">
+                  <option value="member">Member</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <button class="button sign-up" ng-click="login()">Login!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

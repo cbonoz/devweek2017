@@ -1,0 +1,285 @@
+<div ng-controller="SystemController">
+<!--   <div class="row">
+    <div class="columns small-12 medium-3 medium-offset-9 text-right deal-parameters">
+      <img src="./img/filter.png"><a href="#">Deal Parameters</a>
+    </div>
+  </div> -->
+  <ul class="accordion">
+    
+    <li>
+      <span class="accordion-title" id="sectionDetermineProductBreakdown">Determine Product Breakdown</span>
+      <div class="accordion-content">
+        <p class="prompt">Select products and services that apply</p>
+        <div class="row">
+          <div class="columns medium-6 small-12">
+            <ul>
+              <li>
+                <span name="products-services">Programs(On Premise Licenses)</span>
+                <ul>
+                  <li><input type="checkbox" ng-model="programs.ps1" ng-change="updatePrograms()" name="programs" value="P + S1" id="ps1"><label for="ps1" class="navy-blue" data-balloon="{{ definition.ps1 }}" data-balloon-pos="up" data-balloon-length="xlarge">P + S1</label></li>
+                  <li><input type="checkbox" ng-model="programs.psn" ng-change="updatePrograms()" name="programs" value="P + Sn" id="psn"><label for="psn" class="navy-blue" data-balloon="{{ definition.psn }}" data-balloon-pos="up" data-balloon-length="xlarge">P + Sn</label></li>
+                </ul>
+              </li>
+              <li>
+                <span name="products-services">Hardware</span>
+                <ul>
+                  <li><input type="checkbox" ng-model="hardware.hws1" ng-change="updateHardware()" name="hardware" value="HW + S1" id="hws1"><label for="hws1" class="navy-blue" data-balloon="{{ definition.hws1 }}" data-balloon-pos="up" data-balloon-length="xlarge">HW + S1</label></li>
+                  <li><input type="checkbox" ng-model="hardware.hwsn" ng-change="updateHardware()" name="hardware" value="HW + Sn" id="hwsn"><label for="hwsn" class="navy-blue" data-balloon="{{ definition.hwsn }}" data-balloon-pos="up" data-balloon-length="xlarge">HW + Sn</label></li>
+                </ul>
+              </li>
+              <li>
+                <span name="products-services" class="navy-blue" data-balloon="{{definition.publicCloud}}" data-balloon-pos="up" data-balloon-length="xlarge">Public Cloud</span>
+                <ul>
+                  <li>
+                    <span name="public-cloud" class="navy-blue" data-balloon="{{definition.saas}}" data-balloon-pos="up" data-balloon-length="xlarge">SaaS</span>
+                    <ul>
+                      <li>
+                        <div class="inline-block">
+                          <input type="checkbox" ng-change="updatePublicCloud()"name="public-cloud-saas" ng-model="publicCloud.saasNonMetered" ng-change="updateSaaS()" value="Non-Metered" id="saas-non-metered"><label for="saas-non-metered" class="navy-blue" data-balloon="{{definition.nonMetered}}" data-balloon-pos="up" data-balloon-length="xlarge">Non-Metered</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <span class="navy-blue" data-balloon="{{definition.paas}}" data-balloon-pos="up" data-balloon-length="xlarge">PaaS</span>
+                    <ul>
+                      <li>
+                        <div class="inline-block">
+                          <input type="checkbox" ng-model="publicCloud.paasNonMetered" ng-change="updatePublicCloud()" name="public-cloud-paas" value="Non-Metered" id="paas-renewable"><label for="paas-renewable" class="navy-blue" data-balloon="{{definition.nonMetered}}" data-balloon-pos="up" data-balloon-length="xlarge">Non-Metered</label>
+                        </div>
+                        <div class="inline-block">
+                          <input type="checkbox" ng-model="publicCloud.paasMetered" ng-change="updatePublicCloud()" name="public-cloud-paas" value="Metered" id="paas-metered"><label for="paas-metered" class="navy-blue" data-balloon="{{definition.metered}}" data-balloon-pos="up" data-balloon-length="xlarge">Metered</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <span class="navy-blue" data-balloon="{{definition.iaas}}" data-balloon-pos="up" data-balloon-length="xlarge">IaaS</label></span> &amp;
+                    <span class="navy-blue" data-balloon="{{definition.ocm}}" data-balloon-pos="up" data-balloon-length="xlarge">OCM</label></span>
+                    <ul>
+                      <li>
+                        <div class="inline-block">
+                          <input type="checkbox" ng-model="publicCloud.iaasNonMetered" ng-change="updatePublicCloud()"name="public-cloud-iaas" value="Non-Metered" id="iaas-renewable"><label for="iaas-renewable" class="navy-blue" data-balloon="{{definition.nonMetered}}" data-balloon-pos="up" data-balloon-length="xlarge">Non-Metered</label>
+                        </div>
+                        <div class="inline-block">
+                          <input type="checkbox" ng-model="publicCloud.iaasMetered" ng-change="updatePublicCloud()"name="public-cloud-iaas" value="Metered" id="iaas-metered"><label for="iaas-metered" class="navy-blue" data-balloon="{{definition.metered}}" data-balloon-pos="up" data-balloon-length="xlarge">Metered</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="columns medium-6 small-12">
+            <ul>
+              <li>
+                <span name="products-services" value="Private Cloud" id="privateCloud"><label for="privateCloud" class="navy-blue" data-balloon="{{definition.privateCloud}}" data-balloon-pos="up" data-balloon-length="xlarge">Private Cloud</label></span>
+                <ul>
+                  <li><input type="checkbox" name="private-cloud" ng-model="privateCloud.omcs" ng-change="updatePrivateCloud()" value="OMCS" id="omcs"><label for="omcs" class="navy-blue" data-balloon="{{definition.omcs}}" data-balloon-pos="up" data-balloon-length="xlarge">OMCS</label></li>
+                  <li><input type="checkbox" name="private-cloud" ng-model="privateCloud.partnerCloud" ng-change="updatePrivateCloud()" value="Partner Cloud" id="partnerCloud"><label for="partnerCloud" class="navy-blue" data-balloon="{{definition.partner}}" data-balloon-pos="up" data-balloon-length="xlarge">Partner Cloud</label></li>
+                </ul>
+              </li>
+              <li>
+                <span name="products-services"id="services">Services</span>
+                <ul>
+                  <li><input type="checkbox" name="services" ng-model="services.acs" ng-change="updateServices()" value="ACS" id="acs"><label for="acs">Advanced Customer Support (ACS)</label></li>
+                  <li><input type="checkbox" name="services" ng-model="services.oracleConsulting" ng-change="updateServices()" value="Oracle Consulting" id="oracleConsulting"><label for="oracleConsulting">Oracle Consulting</label></li>
+                  <li><input type="checkbox" name="services" ng-model="services.learningCredits" ng-change="updateServices()" value="Learning Credits" id="learning-credits"><label for="learning-credits" class="navy-blue" data-balloon="{{definition.learningCredits}}" data-balloon-pos="up" data-balloon-length="xlarge">Learning Credits</label></li>
+                  <li><input type="checkbox" name="services" ng-model="services.supportRenewals" ng-change="updateServices()" value="Support Renewals" id="support-renewals"><label for="support-renewals" class="navy-blue" data-balloon="{{definition.supportRenewals}}" data-balloon-pos="up" data-balloon-length="xlarge">Support Renewals</label></li>
+                  <li><input type="checkbox" name="services" ng-model="services.linuxSupport" ng-change="updateServices()" value="Linux" id="linux"><label for="linux" class="navy-blue" data-balloon="{{definition.linux}}" data-balloon-pos="up" data-balloon-length="xlarge">Linux Support</label></li>
+                  <li><input type="checkbox" name="services" ng-model="services.oracleVM" ng-change="updateServices()" value="Oracle VM" id="oracleVM"><label for="oracleVM">Oracle VM</label></li>
+                  <li><input type="checkbox" name="services" ng-model="services.bps" ng-change="updateServices()" value="Business Process Services (BPS)" id="bps"><label for="bps" class="navy-blue" data-balloon="{{definition.bps}}" data-balloon-pos="up" data-balloon-length="xlarge">Business Process Services (BPS)</label></li>
+                </ul>
+              </li>
+              <li>
+                <span>Non-Oracle Products &amp; Services</span>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="products-services" ng-model="nonOracleProducts" ng-change="updateNonOracleProducts()" value="Non-Oracle Products &amp; Services" id="other"><label for="other">Other</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div resultbox records="myRecords">
+            <div ng-show="record.ps1[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for P + S1
+              <ul>
+                <li ng-repeat="ps1 in record.ps1" ng-bind-html="ps1.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.psn[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for P + Sn
+              <ul>
+                <li ng-repeat="psn in record.psn" ng-bind-html="psn.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.hws1[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for HW + S1
+              <ul>
+                <li ng-repeat="hws1 in record.hws1" ng-bind-html="hws1.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.hwsn[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for HW + Sn
+              <ul>
+                <li ng-repeat="hwsn in record.hwsn" ng-bind-html="hwsn.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.saasNonMetered[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for SaaS Non-Metered
+              <ul>
+                <li ng-repeat="saasNonMetered in record.saasNonMetered" ng-bind-html="saasNonMetered.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.saasMetered[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for SaaS Metered
+              <ul>
+                <li ng-repeat="saasMetered in record.saasMetered" ng-bind-html="saasMetered.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.paasNonMetered[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for PaaS Non-Metered
+              <ul>
+                <li ng-repeat="paasNonMetered in record.paasNonMetered" ng-bind-html="paasNonMetered.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.paasMetered[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for PaaS Metered
+              <ul>
+                <li ng-repeat="paasMetered in record.paasMetered" ng-bind-html="paasMetered.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.iaasNonMetered[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for IaaS Non-Metered
+              <ul>
+                <li ng-repeat="iaasNonMetered in record.iaasNonMetered" ng-bind-html="iaasNonMetered.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.iaasMetered[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for IaaS Metered
+              <ul>
+                <li ng-repeat="iaasMetered in record.iaasMetered" ng-bind-html="iaasMetered.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.omcs[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for OMCS
+              <ul>
+                <li ng-repeat="omcs in record.omcs" ng-bind-html="omcs.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.partnerCloud[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Partner Cloud
+              <ul>
+                <li ng-repeat="partnerCloud in record.partnerCloud" ng-bind-html="partnerCloud.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.acs[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Advanced Customer Support (ACS)
+              <ul>
+                <li ng-repeat="acs in record.acs" ng-bind-html="acs.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.oracleConsulting[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Oracle Consulting
+              <ul>
+                <li ng-repeat="oracleConsulting in record.oracleConsulting" ng-bind-html="oracleConsulting.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.learningCredits[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Learning Credits
+              <ul>
+                <li ng-repeat="learningCredits in record.learningCredits" ng-bind-html="learningCredits.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.supportRenewals[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Support Renewals
+              <ul>
+                <li ng-repeat="supportRenewals in record.supportRenewals" ng-bind-html="supportRenewals.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.linuxSupport[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Linux Support
+              <ul>
+                <li ng-repeat="linuxSupport in record.linuxSupport" ng-bind-html="linuxSupport.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.oracleVM[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Oracle VM
+              <ul>
+                <li ng-repeat="oracleVM in record.oracleVM" ng-bind-html="oracleVM.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.bps[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Business Process Services (BPS)
+              <ul>
+                <li ng-repeat="bps in record.bps" ng-bind-html="bps.html"></li>
+              </ul>
+            </div>
+          </div>
+          <div resultbox records="myRecords">
+            <div ng-show="record.nonOracleProducts[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}} for Non-Oracle Products &amp; Services
+              <ul>
+                <li ng-repeat="nonOracleProducts in record.nonOracleProducts" ng-bind-html="nonOracleProducts.html"></li>
+              </ul>
+            </div>
+          </div>
+          <!-- <div resultbox records="myRecords">
+            <div ng-show="record.saas[0]" class="columns large-12 result-box {{ record.clas }}">
+              <img ng-src="{{ record.img }}">{{record.title}}
+              <ul>
+                <li ng-repeat="saas in record.saas" ng-bind-html="saas.html"></li>
+              </ul>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="columns small-12 right text-right">
+      <a href="#start" class="button large previous-button radius">Previous</a>
+      <a href="#structure" class="button large next-button radius">Next</a>
+    </div>
+  </div>
+</div>

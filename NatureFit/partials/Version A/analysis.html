@@ -1,0 +1,125 @@
+<div ng-controller="mainController">
+  <input type="text" name="name" ng-model="newName">
+  <input type="submit" value="Add" ng-click="addName">
+  <br><p>{{ newName }}</p>
+  <ul class="accordion" data-accordion data-multi-expand="true">
+    <li class="accordion-item is-active" data-accordion-item>
+      <a href="#" class="accordion-title">Obligor Analysis</a>
+      <div class="accordion-content" data-tab-content>
+        <ul>
+          <li>Obligor - End-User:
+            <ul class="list-style-circle">
+              <li>Commercial Entity</li>
+              <li>Government</li>
+              <li>Partner Acting as Service Provider/System Integrator/Outsourcer</li>
+            </ul>
+          </li>
+          <li>Obligor-Non-End-User (could be a Partner):
+            <ul class="list-style-circle">
+              <li>Independent Software Vendor (ISV/OEM)</li>
+              <li>Reseller Financing</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="accordion-item is-active" data-accordion-item>
+      <a href="#" class="accordion-title">Supplier Identification</a>
+      <div class="accordion-content" data-tab-content>
+        <ul>
+          <li>Direct (Oracle)</li>
+          <li>Indirect
+            <ul class="list-style-circle">
+              <li>Reseller</li>
+              <li>Reseller and VAD</li>
+              <li>Other (e.g. O>VAD>VAR>VAR>E/U)</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="accordion-item is-active" data-accordion-item>
+      <a href="#" class="accordion-title">Sales Risk Ratings</a>
+      <div class="accordion-content" data-tab-content>
+        <ul>
+          <li>Financial Statement Analysis</li>
+          <li>Risk Rating Matrix</li>
+          <li>Structure Matrix</li>
+        </ul>
+      </div>
+    </li>
+    <li class="accordion-item is-active" data-accordion-item>
+      <a href="#" class="accordion-title">Customer Financial Footprint</a>
+      <div class="accordion-content" data-tab-content>
+        <ul>
+          <li>Financial Footprint</li>
+          <li>Customer Search</li>
+          <li>Maintenance</li>
+        </ul>
+      </div>
+    </li>
+    <li class="accordion-item is-active" data-accordion-item>
+      <a href="#" class="accordion-title">Start a Deal in WebX</a>
+      <div class="accordion-content" data-tab-content>
+        <ul>
+          <li>Opportunity Management</li>
+          <li>Brand New Deal in WebX</li>
+          <li>Small-Ticket Application</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- DOES NOT WORK -->
+<!--             <zf-accordion auto-open="false" collapsible="true" multi-open="true">
+	<zf-accordion-item title="Obligor Analysis">
+		<ul>
+      <li>Obligor - End-User:
+        <ul class="list-style-circle">
+          <li>Commercial Entity</li>
+          <li>Government</li>
+          <li>Partner Acting as Service Provider/System Integrator/Outsourcer</li>
+        </ul>
+      </li>
+      <li>Obligor-Non-End-User (could be a Partner):
+        <ul class="list-style-circle">
+          <li>Independent Software Vendor (ISV/OEM)</li>
+          <li>Reseller Financing</li>
+        </ul>
+      </li>
+    </ul>
+	</zf-accordion-item>
+	<zf-accordion-item title="Supplier Identification">
+		<ul>
+	    <li>Direct (Oracle)</li>
+	    <li>Indirect
+	      <ul class="list-style-circle">
+	        <li>Reseller</li>
+	        <li>Reseller and VAD</li>
+	        <li>Other (e.g. O>VAD>VAR>VAR>E/U)</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</zf-accordion-item>
+	<zf-accordion-item title="Sales Risk Ratings">
+		<ul>
+	    <li>Financial Statement Analysis</li>
+	    <li>Risk Rating Matrix</li>
+	    <li>Structure Matrix</li>
+	  </ul>
+	</zf-accordion-item>
+	<zf-accordion-item title="Sales Risk Ratings">
+		<ul>
+      <li>Financial Footprint</li>
+      <li>Customer Search</li>
+      <li>Maintenance</li>
+    </ul>
+	</zf-accordion-item>
+	<zf-accordion-item title="Sales Risk Ratings">
+		<ul>
+      <li>Opportunity Management</li>
+      <li>Brand New Deal in WebX</li>
+      <li>Small-Ticket Application</li>
+    </ul>
+	</zf-accordion-item>
+</zf-accordion> -->

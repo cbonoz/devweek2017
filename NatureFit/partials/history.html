@@ -1,0 +1,54 @@
+<div ng-controller="workoutHistoryController">
+  <ul class="accordion">
+
+    <li>
+      <span class="accordion-title" id="sectionDetermineProductBreakdown">Workout History</span>
+      <div class="accordion-content">
+
+      <table id="search">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Date/Time</th>
+            <th>Results</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Golden Gate Park 5k</td>
+            <td>Run with friends rain or shine!</td>
+            <td>11 Golden Gate Park, San Francisco</td>
+            <td>Feb 13, 2017</td>
+            <td><button class="button">Log</button></td>
+          </tr>
+
+          <tr>
+            <td>Golden Gate Park 5k</td>
+            <td>Run with friends rain or shine!</td>
+            <td>11 Golden Gate Park, San Francisco</td>
+            <td>Feb 13, 2017</td>
+            <td><button class="button">Log</button></td>
+          </tr>
+          <tr>
+            <td>Golden Gate Park 5k</td>
+            <td>Run with friends rain or shine!</td>
+            <td>11 Golden Gate Park, San Francisco</td>
+            <td>Feb 13, 2017</td>
+            <td><button class="button">Log</button></td>
+          </tr>
+
+          <tr ng-repeat="resource in catalogue | filter: filter_title | orderBy: 'title'">
+            <td><a ng-if="!resource.ifWebsite" ng-href="{{ resource.url }}" download="{{ resource.title }}">{{ resource.title }}</a><a ng-if="resource.ifWebsite" ng-href="{{ resource.url }}" target="_blank">{{ resource.title }}</a><br ng-if="resource.path"><span class="resource-path" ng-if="resource.path" ng-bind-html="trustAsHtml(resource.path)"></br></span></td>
+            <!-- <td><a ng-click="downloadResource(resource)" ng-download="'{{ resource.title }}'">{{ resource.title }}</a></td> -->
+            <td>{{ resource.description }}</td>
+            <td><span ng-repeat="section in resource.stepSections | unique: 'section'"><a href="{{ section.route }}">{{ section.section }}</a><span ng-if="!$last">, </span></span></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </li>
+  </ul>
+</div>

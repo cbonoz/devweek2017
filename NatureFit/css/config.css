@@ -1,0 +1,11 @@
+img[src*="/content/fragments/myo_breadcrumb/spacer.gif"] {
+	display: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+form[title="Search Form"] select {
+	width: inherit;
+}
