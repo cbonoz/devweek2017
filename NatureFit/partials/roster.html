@@ -2,41 +2,27 @@
   <ul class="accordion">
 
     <li>
-      <span class="accordion-title" id="sectionDetermineProductBreakdown">Workout History</span>
+      <span class="accordion-title" id="sectionDetermineProductBreakdown">Roster</span>
       <div class="accordion-content">
-
+      <h3>Golden Gate Park 5k</h3>
       <table id="search">
           <thead>
           <tr>
             <th>Name</th>
-            <th>Description</th>
-            <th>Location</th>
-            <th>Date/Time</th>
-            <th>Results</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Attendance</th>
+            <th>Attendance</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>Golden Gate Park 5k</td>
-            <td>Run with friends rain or shine!</td>
-            <td>11 Golden Gate Park, San Francisco</td>
-            <td>Feb 13, 2017</td>
-            <td><button class="button">Log</button></td>
-          </tr>
-
-          <tr>
-            <td>Golden Gate Park 5k</td>
-            <td>Run with friends rain or shine!</td>
-            <td>11 Golden Gate Park, San Francisco</td>
-            <td>Feb 13, 2017</td>
-            <td><button class="button">Log</button></td>
-          </tr>
-          <tr>
-            <td>Golden Gate Park 5k</td>
-            <td>Run with friends rain or shine!</td>
-            <td>11 Golden Gate Park, San Francisco</td>
-            <td>Feb 13, 2017</td>
-            <td><button class="button">Log</button></td>
+          <tr ng-repeat="customer in customersList">
+            <td>{{customer.firstName}} {{ customer.lastName}}</td>
+            <td>{{ customer.emailAddresses["elements"][0].emailAddress }}</td>
+            <td>{{ customer.phoneNumbers["elements"][0].phoneNumber }}</td>
+            <!-- <td>{{ customer.affiliation }}</td> -->
+            <td><button class="button">Yes</button></td>
+            <td><button class="button alert">No</button></td>
           </tr>
 
           <tr ng-repeat="resource in catalogue | filter: filter_title | orderBy: 'title'">

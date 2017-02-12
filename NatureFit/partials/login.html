@@ -14,7 +14,7 @@
   }
 </style>
 <div ng-controller="LoginController">
-  <div class="row login-page">
+  <div class="row">
     <div class="columns small-12 medium-6">
       <div class="row">
         <div class="columns small-10">
@@ -23,24 +23,40 @@
             <div class="row">
               <div class="columns small-10">
                 <label for="fullname">Full Name</label>
-                <input type="text" name="full_name">
+                <input ng-model="newUser.fullName" class="text-center" type="text" name="full_name">
               </div>
             </div>
             <div class="row">
               <div class="columns small-10">
-                <label for="full-name">Email</label>
-                <input type="text" name="full_name">
+                <label for="email">Email</label>
+                <input ng-model="newUser.email" class="text-center" type="text" name="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <label for="full-name">Phone (Opt)</label>
+                <input ng-model="newUser.phoneNumber" class="text-center" type="text" name="phoneNumber" placeholder="1234567890">
               </div>
             </div>
             <div class="row">
               <div class="columns small-10">
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input ng-model="newUser.password" type="password" name="password">
               </div>
             </div>
             <div class="row">
               <div class="columns small-10">
-                <button class="button sign-up">Sign Up!</button>
+                <label for="member_type">Affiliation</label>
+                <select ng-model="newUser.affiliation" name="member_type" id="member_type">
+                  <option value="None">None</option>
+                  <option value="24 Hour Fitness">24 Hour Fitness</option>
+                  <option value="Fitness SF">Fitness SF</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-10">
+                <button ng-click="signup()" class="button sign-up">Sign Up!</button>
               </div>
             </div>
           </form>
@@ -55,7 +71,7 @@
             <div class="row">
               <div class="columns small-10">
                 <label for="full-name">Email</label>
-                <input ng-model="user.email" type="text" name="full_name">
+                <input ng-model="user.email" class="text-center" type="text" name="email">
               </div>
             </div>
             <div class="row">
