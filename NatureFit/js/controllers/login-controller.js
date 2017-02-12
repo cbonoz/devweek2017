@@ -14,7 +14,7 @@ myApp.controller('LoginController', function($scope, CloverFactory, $window) {
       return response;
     }, function errorCallback(response) {
       console.log(response);
-    });
+    }));
     delete $scope.newUser;
   }
 });
