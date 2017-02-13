@@ -58,7 +58,7 @@ def attempt_post(endpoint, body):
         r = requests.post(endpoint, json=body, verify=False)
     except Exception as e:
         return jsonify(success=False, error=str(e))
-    return jsonify(success=True, message=r.text)
+    return jsonify(success=True)
 
 # Copy the volume from the source instance to the new instance.
 @app.route("/api/v1/createmirror")

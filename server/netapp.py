@@ -10,20 +10,22 @@ import os
 import requests
 import json
 from requests.auth import HTTPBasicAuth
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # ============================
-# === YOUR CONFIG SETTINGS ===
+# === YOUR CONFIG SETTINGS - DEFINE THE POOL ===
 # ============================
 
 # Assuming the user knows what instance names and volumes are going to either be used within the load balancer for their application cluster, we can automatically extract the necessary configs to do instant snap mirroring to new instances in response to an event.
 
 # TODO: Support loading these settings from a csv file.
-
-# If any of the ONTAP_INSTANCES fail, backup to the indicated BACKUP_INSTANCE if available.
 ONTAP_INSTANCES = ['TeamOlive', 'TeamOlive2']
 ACTIVE_MOUNT_VOLUMES = ['Team_Olive', 'Team_Olive2']
-BACKUP_INSTANCE = ['TeamOlive2']
-IP_ADDRESSES = ["35.160.29.86"]
+IP_ADDRESSES = ["35.160.29.86", "52.36.209.244"]
+
+BACKUP_INSTANCE = 'TeamOlive2'
+
 
 # auth for OnTap API routes (use env for official release)
 ONTAP_USER = os.environ.get("ONTAP_USER", 'admin')
@@ -48,7 +50,7 @@ SVM_KEY_API = BASE_URL +  "/1.0/slo/storage-vms"
 FILE_SHARE_KEY_API = BASE_URL + "/1.0/slo/file-shares"
 
 class NetAppInstance:
-
+    """ Class for automatically retrieving security key information from NetApp API for pool instances ( including backup ) """
     def __init__(self, name, active_volume, elasticIp = None):
         # Parameters of the instance.
         self.name = name
@@ -58,10 +60,6 @@ class NetAppInstance:
         self.sslKey = self.get_ssl_key(SSL_KEY_API) 
         self.svmKey = self.get_svm_key(SVM_KEY_API)
         self.fsKey = self.get_fs_key(FILE_SHARE_KEY_API) 
-
-  
-    def mount_volume(self, volume_key=None):
-        return None
 
     def get_ssl_key(self, url):
         response = requests.get(url, auth=HTTPBasicAuth(ONTAP_USER, ONTAP_PASS),

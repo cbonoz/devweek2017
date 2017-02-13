@@ -3,6 +3,7 @@
 ![alt text](https://s32.postimg.org/oecpvcxo5/nature_fit_small.png  "NatureFit Logo")
 ---
 Integrated Clover and NetApp backend DeveloperWeek 2017 code.
+Honorable Mention - NetApp 
 
 NatureFit is a new fitness rewards platform designed to boost gym sales and club membership through a gym perk incentive-based credit system that rewards people for making referalls and sticking to their gym routines. Powered by Clover Point of Sale API, and customer tracking - users can earn points for referring signups at the gym and receive gym credit for buying items like protein bars, shakes, etc. at a potentially-unnmanned food stand located within the gym (that has Clover POS set up). NetApp backend allows high resiliency (even in small datacenter configurations) by using a novel instant-backup strategy for replacing stalling instances on the fly.
 
@@ -34,8 +35,6 @@ Disaster recovery. Using volume SnapMirror, data is mirrored in real time to ano
 
 We integrated the snap-mirror technology natively into the consumer-side of the app - working in tandem to listen to any latency increases or time outs that occur for an end user. In the case of any anomoly on an instance, we use the agility of NetApp's spin-mirror to mirror the troubled instance and redirect traffic (automatically). This minimizes the notice/impact of end users while minizing the cost for the provider.
 
-
-
 ## Set up instruction:
 
 1. You will need your AWS account set up with instances supported by NetApp's OnTap Cloud technology. This is well documented on the AWS website, so we won't focus on that here.
@@ -48,8 +47,10 @@ Using Clover for customer management and tracking.
 ## Demo Presentation:
 
 1. Story of NatureFit 
-2. Failure and Fallback (not just disaster recovery, but disaster preparation).
-3. Resync on boot.
+2. Failure and instant snapmirror. 
+    We have back up instances configured, but not brought online.
+    AWS has autoscaling and step-based scaling but easy to be too conservative or too late (leading to a poor performance period for users while new instances are generated). We take advance of OnTap's quick mirroring to build an instance on demand, minimizing the spin up time and reducing the overall costs by allowing you to be more precise with your scaling triggers.
+3. Resync after production back online. 
 
 ## Developers
 Backend: Chris Buonocore
